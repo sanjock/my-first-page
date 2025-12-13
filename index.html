@@ -1,16 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>두목님의 첫 GitHub 페이지</title>
+    <title>이메일로 자료 받기</title>
     <meta charset="UTF-8">
     <style>
         body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; }
         h1 { color: #333; }
+        form { display: inline-block; text-align: left; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        input[type="text"], input[type="email"] { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; box-sizing: border-box; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>🔥 두목님, GitHub Pages 배포 성공!</h1>
-    <p>이 페이지는 GitHub Pages를 통해 배포되었습니다.</p>
-    <p>코드를 업데이트하면 자동으로 웹사이트도 업데이트됩니다.</p>
+    <h1>이메일로 자료 받기</h1>
+    
+    <form id="submit-form">
+      
+      <label for="companyName">회사명 (필수):</label>
+      <input type="text" id="companyName" name="companyName" required><br>
+      
+      <label for="contactPerson">담당자:</label>
+      <input type="text" id="contactPerson" name="contactPerson"><br>
+      
+      <label for="userEmail">이메일 (필수):</label>
+      <input type="email" id="userEmail" name="userEmail" required><br>
+      
+      <button type="submit">제출</button>
+      
+      <p id="response-message" style="color: green; margin-top: 15px;"></p>
+    </form>
+
+    <script>
+      // -------------------------------------------------------------------
+      // ⚠️ 중요: 아래 '#YOUR_WEB_APP_URL#'을 두목님의 웹 앱 URL로 바꿔주십시오.
+      // -------------------------------------------------------------------
+      const form = document.getElementById('submit-form');
+      const appURL = '#YOUR_WEB_APP_URL#'; 
+      const responseMessage = document.getElementById('response-message');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        // HTML5 유효성 검사를 통과하지 못하면 스크립트가 실행되지 않음
+        if (!form.checkValidity()) {
+            return;
+        }
+
+        responseMessage.textContent = '제출 중...';
+        
+        // 폼 데이터를 URLSearchParams 형태로 변환하여 POST 본문으로 사용
+        const data = new FormData(form);
+        const queryString = new URLSearchParams(data).toString();
+
+        fetch(appURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: queryString // 직렬화된 데이터 전송
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.result === 'success') {
+                responseMessage.textContent = '✅ 자료 요청이 성공적으로 접수되었습니다!';
+                form.reset(); // 폼 초기화
+            } else {
+                responseMessage.textContent = '❌ 제출에 실패했습니다: ' + result.message;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            responseMessage.textContent = '❌ 네트워크 오류가 발생했습니다.';
+        });
+      });
+    </script>
 </body>
 </html>
