@@ -3,419 +3,617 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이메일로 자료 받기</title>
+    <title>부동산 필지-도로 접면 분석 자동화 개발</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { 
-            font-family:'Malgun Gothic',sans-serif; 
-            background:linear-gradient(135deg,#667eea,#764ba2); 
-            min-height:100vh; 
-            display:flex;
-            flex-direction:column;
-            justify-content:center; 
-            align-items:center; 
-            padding:40px 20px; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .wrapper {
-            width:100%;
-            max-width:967px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
+        
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            line-height: 1.7;
         }
-        .logo {
-            width:100%;
-            max-width:967px;
-            margin-bottom:30px;
+        
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .logo img {
-            width:100%;
-            height:auto;
-            display:block;
+        
+        .header {
+            background: #2d3748;
+            color: white;
+            padding: 30px 35px;
         }
-        .container { 
-            background:white; 
-            border-radius:20px; 
-            box-shadow:0 20px 60px rgba(0,0,0,0.3); 
-            padding:40px; 
-            max-width:500px; 
-            width:100%; 
+        
+        .header h1 {
+            font-size: 23px;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
-        h1 { 
-            color:#333; 
-            margin-bottom:10px; 
-            text-align:center; 
-            font-size:28px; 
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
         }
-        .subtitle {
-            text-align:center;
-            color:#666;
-            font-size:14px;
-            margin-bottom:30px;
+        
+        .content {
+            padding: 35px;
         }
-        .form-group { 
-            margin-bottom:25px; 
+        
+        .section {
+            margin-bottom: 28px;
         }
-        label { 
-            display:block; 
-            color:#555; 
-            font-weight:600; 
-            margin-bottom:8px; 
-            font-size:14px; 
+        
+        .section-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #4a5568;
         }
-        .optional {
-            color:#999;
-            font-weight:400;
-            font-size:12px;
+        
+        .problem-box {
+            background: #fff5f5;
+            border-left: 3px solid #e53e3e;
+            padding: 16px;
+            border-radius: 6px;
         }
-        input[type="text"],
-        input[type="email"] { 
-            width:100%; 
-            padding:12px 15px; 
-            border:2px solid #e0e0e0; 
-            border-radius:8px; 
-            font-size:15px; 
-            transition:all .3s; 
+        
+        .problem-box li {
+            margin-bottom: 7px;
+            padding-left: 8px;
+            font-size: 14px;
+            color: #555;
         }
-        input[type="text"]:focus,
-        input[type="email"]:focus { 
-            outline:none; 
-            border-color:#667eea; 
-            box-shadow:0 0 0 3px rgba(102,126,234,0.1); 
+        
+        .scope-box {
+            background: #f7fafc;
+            padding: 18px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e0;
+            margin-top: 10px;
         }
-        input.error { 
-            border-color:#ff4757; 
+        
+        .scope-item {
+            margin-bottom: 14px;
+            padding: 12px;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #4a5568;
         }
-        .error-message { 
-            color:#ff4757; 
-            font-size:12px; 
-            margin-top:5px; 
-            display:none; 
+        
+        .scope-item:last-child {
+            margin-bottom: 0;
         }
-        .error-message.show { 
-            display:block; 
+        
+        .scope-item h4 {
+            color: #2d3748;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
         }
-        .agreements {
-            margin-bottom:25px;
-            padding:15px;
-            background:#f8f9fa;
-            border-radius:8px;
+        
+        .scope-item p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
         }
-        .agreement-item {
-            margin-bottom:12px;
-            display:flex;
-            align-items:center;
+        
+        .realistic-note {
+            background: #fffaf0;
+            border: 1px solid #f6ad55;
+            padding: 14px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #744210;
+            line-height: 1.6;
         }
-        .agreement-item:last-child {
-            margin-bottom:0;
+        
+        .realistic-note strong {
+            color: #c05621;
         }
-        .agreement-item input[type="checkbox"] {
-            width:18px;
-            height:18px;
-            margin-right:10px;
-            cursor:pointer;
+        
+        .benefits-box {
+            background: #f0fff4;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid #9ae6b4;
         }
-        .agreement-item label {
-            margin:0;
-            font-size:14px;
-            font-weight:400;
-            cursor:pointer;
-            display:flex;
-            align-items:center;
+        
+        .benefits-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 12px;
         }
-        .agreement-item a {
-            color:#667eea;
-            text-decoration:none;
-            margin-left:5px;
+        
+        .benefits-box ul {
+            margin-left: 20px;
         }
-        .agreement-item a:hover {
-            text-decoration:underline;
+        
+        .benefits-box li {
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #666;
         }
-        button { 
-            width:100%; 
-            padding:14px; 
-            background:linear-gradient(135deg,#667eea,#764ba2); 
-            color:white; 
-            border:none; 
-            border-radius:8px; 
-            font-size:16px; 
-            font-weight:600; 
-            cursor:pointer; 
-            transition:.2s; 
+        
+        .tech-box {
+            background: #f7fafc;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 10px;
         }
-        button:hover:not(:disabled) { 
-            transform:translateY(-2px); 
-            box-shadow:0 10px 20px rgba(102,126,234,0.3); 
+        
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
         }
-        button:disabled {
-            opacity:0.4;
-            cursor:not-allowed;
-            transform:none;
-            background:#ccc;
+        
+        .tech-badge {
+            background: #e6fffa;
+            color: #234e52;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            border: 1px solid #81e6d9;
         }
-        .success-message { 
-            background:#10b981; 
-            color:white; 
-            padding:15px; 
-            border-radius:8px; 
-            text-align:center; 
-            margin-top:20px; 
-            display:none; 
-            line-height:1.5; 
+        
+        .tech-note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
         }
-        .success-message.show { 
-            display:block; 
-            animation:slideDown .3s; 
+        
+        .timeline {
+            background: #f7fafc;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 10px;
         }
-        @keyframes slideDown { 
-            from{opacity:0; transform:translateY(-10px);} 
-            to{opacity:1; transform:translateY(0);} 
+        
+        .timeline-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            align-items: flex-start;
         }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .timeline-week {
+            background: #4a5568;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            min-width: 65px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .timeline-desc {
+            color: #555;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .budget-box {
+            background: #fff;
+            border: 2px solid #48bb78;
+            padding: 18px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .budget-total {
+            border-top: 2px solid #2d3748;
+            margin-top: 10px;
+            padding-top: 10px;
+            font-weight: 700;
+            font-size: 17px;
+            color: #2d3748;
+        }
+        
+        .budget-note {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #cbd5e0;
+            color: #666;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .deliverables {
+            background: #fafafa;
+            padding: 14px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        
+        .deliverables li {
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .api-info {
+            background: #edf2f7;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        
+        .api-item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #cbd5e0;
+        }
+        
+        .api-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .api-item h4 {
+            color: #2d3748;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .api-item p {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
         .footer {
-            margin-top:40px;
-            padding:30px 20px;
-            background:rgba(255,255,255,0.1);
-            border-radius:15px;
-            text-align:center;
-            color:white;
-            max-width:967px;
-            width:100%;
+            background: #f7fafc;
+            padding: 24px 35px;
+            text-align: center;
+            border-top: 2px solid #cbd5e0;
         }
-        .footer-content {
-            line-height:1.8;
-            font-size:14px;
+        
+        .contact-info {
+            margin-top: 10px;
+            color: #555;
+            font-size: 13px;
         }
-        .footer-title {
-            font-size:18px;
-            font-weight:600;
-            margin-bottom:15px;
+        
+        .contact-info div {
+            margin: 5px 0;
         }
-        .footer-divider {
-            height:1px;
-            background:rgba(255,255,255,0.3);
-            margin:15px 0;
+        
+        .feasibility-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 10px;
         }
-        .footer-links {
-            margin-top:15px;
+        
+        .feasibility-box h4 {
+            color: #2c5282;
+            font-size: 14px;
+            margin-bottom: 8px;
         }
-        .footer-links a {
-            color:white;
-            text-decoration:none;
-            margin:0 10px;
-            opacity:0.9;
+        
+        .feasibility-box ul {
+            margin-left: 18px;
         }
-        .footer-links a:hover {
-            opacity:1;
-            text-decoration:underline;
+        
+        .feasibility-box li {
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
         }
-        @media (max-width:1000px) {
-            .logo,
-            .wrapper,
-            .footer {
-                max-width:100%;
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="logo">
-            <img src="logo.png" alt="로고">
+    <div class="container">
+        <div class="header">
+            <h1>부동산 필지-도로 접면 분석 자동화 도구</h1>
+            <p>공간 데이터 정합 및 반자동 접도 판정 시스템 개발</p>
         </div>
         
-        <div class="container">
-            <h1>이메일로 자료 받기</h1>
-            <p class="subtitle">입력하신 이메일로 자료를 보내드립니다</p>
+        <div class="content">
+            <!-- 해결 문제 -->
+            <div class="section">
+                <h2 class="section-title">해결하려는 문제</h2>
+                <div class="problem-box">
+                    <ul>
+                        <li><strong>데이터 불일치:</strong> 지목상 '도로'가 아니지만 실제 도로로 사용되는 필지의 데이터 누락</li>
+                        <li><strong>정합성 오차:</strong> 도로 중앙선 데이터와 지적도상 도로 위치의 미세한 불일치 (±1~3m)</li>
+                        <li><strong>데이터 공백:</strong> 소로, 진입로 등 일부 구간의 중앙선 데이터 부재</li>
+                        <li><strong>수작업 비효율:</strong> 필지별 접도 여부를 일일이 지적도와 대조하며 확인</li>
+                    </ul>
+                </div>
+            </div>
             
-            <form id="downloadForm">
-                <div class="form-group">
-                    <label for="company">회사명</label>
-                    <input type="text" id="company" required>
-                    <div class="error-message" id="companyError">회사명을 입력해주세요.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="name">담당자 <span class="optional">(선택)</span></label>
-                    <input type="text" id="name">
-                    <div class="error-message" id="nameError">담당자명을 입력해주세요.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">이메일</label>
-                    <input type="email" id="email" required>
-                    <div class="error-message" id="emailError">올바른 이메일 주소를 입력해주세요.</div>
-                </div>
-                
-                <div class="agreements">
-                    <div class="agreement-item">
-                        <input type="checkbox" id="privacy" required>
-                        <label for="privacy">
-                            <a href="privacy.html" target="_blank">개인정보 처리방침</a>에 동의합니다
-                        </label>
+            <!-- 개발 범위 -->
+            <div class="section">
+                <h2 class="section-title">개발 범위 (실제 구현 가능)</h2>
+                <div class="scope-box">
+                    <div class="scope-item">
+                        <h4>1단계: 공개 API 연동 및 데이터 수집</h4>
+                        <p>→ 브이월드(Vworld) API: 지적도, 건물 데이터<br>
+                        → 도로명주소 API: 도로 정보<br>
+                        → 특정 필지 입력 시 주변 반경 100m 데이터 자동 수집</p>
                     </div>
-                    <div class="agreement-item">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">
-                            <a href="terms.html" target="_blank">이용약관</a>에 동의합니다
-                        </label>
+                    
+                    <div class="scope-item">
+                        <h4>2단계: 공간 분석 자동화</h4>
+                        <p>→ 도로 중앙선/경계에 버퍼(±2~3m) 생성으로 오차 보정<br>
+                        → 필지 경계와 도로 버퍼의 교차 여부 자동 판정<br>
+                        → 접촉 길이 계산 (최소 2m 이상 기준 판단)<br>
+                        → "접도 가능성: 높음/낮음/확인 필요" 자동 분류</p>
+                    </div>
+                    
+                    <div class="scope-item">
+                        <h4>3단계: 시각화 및 인터페이스</h4>
+                        <p>→ 웹 지도에 필지(파랑), 도로(빨강), 교차부분(노랑) 표시<br>
+                        → 간단한 웹 대시보드 (Streamlit 기반)<br>
+                        → 지번 또는 주소 입력 → 즉시 분석 결과 표시<br>
+                        → 결과 이미지/PDF 저장 기능</p>
                     </div>
                 </div>
                 
-                <button type="submit" id="submitBtn" disabled>신청하기</button>
-            </form>
+                <div class="realistic-note">
+                    <strong>⚠️ 명확한 한계:</strong><br>
+                    • AI 모델 없음: 항공사진 분석, 미등록 도로 자동 탐지 불가<br>
+                    • 정확도 70~80%: 복잡한 케이스는 여전히 사람이 최종 판단 필요<br>
+                    • 테스트 지역 한정: 초기에는 서울시 일부 구역으로 검증<br>
+                    • 데이터 의존성: API에서 제공하지 않는 골목길/진입로는 탐지 불가<br>
+                    • 이 도구는 "1차 스크리닝 보조"이며, 완전 자동화가 아닙니다
+                </div>
+            </div>
             
-            <div class="success-message" id="successMessage">
-                ✅ 신청이 완료되었습니다!<br>
-                입력하신 이메일로 자료를 발송했습니다.
+            <!-- 기대 효과 -->
+            <div class="section">
+                <h2 class="section-title">현실적 기대 효과</h2>
+                <div class="benefits-box">
+                    <p><strong>시나리오: 신규 토지 10건 검토 업무</strong></p>
+                    <ul>
+                        <li><strong>기존:</strong> 10건 × 10~15분 수작업 = 100~150분</li>
+                        <li><strong>개선:</strong> 
+                            <ul style="margin-top: 5px;">
+                                <li>· 프로그램에 일괄 입력: 5분</li>
+                                <li>· 자동 분석 완료 (명확한 7건 통과, 맹지 1건 제외)</li>
+                                <li>· 애매한 2건만 수동 검토: 20~30분</li>
+                                <li>→ <strong>총 소요: 25~35분 (약 4~5배 단축)</strong></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p style="margin-top: 12px; font-size: 12px; color: #666;">
+                        ※ 반복 작업 시 속도 더욱 향상 (재분석 거의 즉시)<br>
+                        ※ 사람의 실수 감소 및 분석 일관성 확보<br>
+                        ※ 시각화로 의사결정 품질 개선
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 사용 기술 -->
+            <div class="section">
+                <h2 class="section-title">사용 기술</h2>
+                <div class="tech-box">
+                    <div class="tech-list">
+                        <span class="tech-badge">Python 3.x</span>
+                        <span class="tech-badge">GeoPandas</span>
+                        <span class="tech-badge">Shapely</span>
+                        <span class="tech-badge">Folium</span>
+                        <span class="tech-badge">Streamlit</span>
+                        <span class="tech-badge">Requests</span>
+                    </div>
+                    <p class="tech-note">
+                        → 모두 무료 오픈소스 라이브러리<br>
+                        → 별도 서버 없이 로컬 PC 실행 가능<br>
+                        → 공개 API 활용으로 라이센스 비용 없음
+                    </p>
+                </div>
+            </div>
+            
+            <!-- 활용 API -->
+            <div class="section">
+                <h2 class="section-title">활용 공개 API</h2>
+                <div class="api-info">
+                    <div class="api-item">
+                        <h4>① 브이월드 (Vworld) API</h4>
+                        <p>• 제공: 국토교통부 (www.vworld.kr)<br>
+                        • 데이터: 지적도(필지 경계), 건물 외곽선, 행정구역<br>
+                        • 특징: 무료, 회원가입 후 즉시 발급, 일일 1만건 제한<br>
+                        • 활용: 필지 형상 및 주변 정보 수집</p>
+                    </div>
+                    
+                    <div class="api-item">
+                        <h4>② 도로명주소 API</h4>
+                        <p>• 제공: 행정안전부 (www.juso.go.kr)<br>
+                        • 데이터: 도로명주소, 지번 변환, 좌표<br>
+                        • 특징: 무료, 간단한 승인 절차<br>
+                        • 활용: 주소 입력 시 좌표 변환</p>
+                    </div>
+                    
+                    <div class="api-item">
+                        <h4>③ 국토정보플랫폼 (선택)</h4>
+                        <p>• 제공: 국토교통부<br>
+                        • 데이터: 용도지역, 개발행위허가 제한 등<br>
+                        • 활용: 추가 분석 시 참조 가능</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 개발 일정 -->
+            <div class="section">
+                <h2 class="section-title">개발 일정 (총 6주)</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-week">1주차</div>
+                        <div class="timeline-desc">개발 환경 구축, API 키 발급 및 연동 테스트, 샘플 데이터 수집</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-week">2주차</div>
+                        <div class="timeline-desc">지적도·도로 데이터 파싱 코드 작성, 좌표계 변환 처리</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-week">3주차</div>
+                        <div class="timeline-desc">공간 분석 로직 구현 (버퍼 생성, 교차 판정, 길이 계산)</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-week">4주차</div>
+                        <div class="timeline-desc">Folium 지도 시각화, 레이어 구성, 색상 구분</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-week">5주차</div>
+                        <div class="timeline-desc">Streamlit 웹 대시보드 개발, 입력 폼 및 결과 표시</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-week">6주차</div>
+                        <div class="timeline-desc">통합 테스트, 버그 수정, 사용자 매뉴얼 작성, 코드 정리</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 개발 비용 -->
+            <div class="section">
+                <h2 class="section-title">개발 비용</h2>
+                <div class="budget-box">
+                    <div class="budget-item">
+                        <span>개발 기간</span>
+                        <span>6주 (1.5개월)</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>투입 인력</span>
+                        <span>개발자 1인 (파트타임 가능)</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>예상 작업 시간</span>
+                        <span>주 20시간 × 6주 = 120시간</span>
+                    </div>
+                    <div class="budget-item budget-total" style="display: flex; justify-content: space-between;">
+                        <span>총 개발 비용</span>
+                        <span style="color: #48bb78;">800만원</span>
+                    </div>
+                    <div class="budget-note">
+                        ※ 소스코드 전체 제공 (GitHub 리포지토리)<br>
+                        ※ 1개월 무상 버그 수정 지원<br>
+                        ※ 온라인 사용자 교육 또는 영상 매뉴얼 제공<br>
+                        ※ 기능 추가/확장은 별도 협의
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 납품 항목 -->
+            <div class="section">
+                <h2 class="section-title">납품 항목</h2>
+                <div class="deliverables">
+                    <ul>
+                        <li>✓ Python 소스코드 전체 (주석 포함, GitHub 제공)</li>
+                        <li>✓ Streamlit 웹 애플리케이션 (로컬 실행 파일)</li>
+                        <li>✓ 상세 사용 매뉴얼 (스크린샷 포함 PDF)</li>
+                        <li>✓ 설치 가이드 및 환경 설정 문서</li>
+                        <li>✓ 샘플 데이터 및 테스트 결과 (10~20건)</li>
+                        <li>✓ 기술 문서 (알고리즘 설명, API 사용법)</li>
+                        <li>✓ 온라인 교육 또는 사용 방법 영상 (30~60분)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 실현 가능성 -->
+            <div class="section">
+                <h2 class="section-title">개발 실현 가능성 근거</h2>
+                <div class="feasibility-box">
+                    <h4>✓ 기술적 검증</h4>
+                    <ul>
+                        <li>사용하는 모든 라이브러리는 국내외에서 수천 개 프로젝트에 실제 적용됨</li>
+                        <li>유사 사례: 직방, 네이버 부동산 등 PropTech 서비스가 동일한 기술 사용</li>
+                        <li>GitHub에 'geopandas parcel analysis' 검색 시 수백 개의 유사 코드 존재</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 12px;">✓ 학습 곡선</h4>
+                    <ul>
+                        <li>GeoPandas 공식 문서: 초보자도 2~3일 내 기본 숙지 가능</li>
+                        <li>Streamlit: 30분 튜토리얼로 웹 앱 제작 가능 (가장 쉬운 Python 웹 프레임워크)</li>
+                        <li>공개 API: 문서화 잘 되어 있고, 커뮤니티 활발</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 12px;">✓ 리스크 관리</h4>
+                    <ul>
+                        <li>복잡한 AI 모델 없음 → 기술적 실패 위험 최소화</li>
+                        <li>오픈소스 기반 → 라이센스 문제 없음</li>
+                        <li>단계별 검증 → 각 주차마다 작동하는 결과물 확인 가능</li>
+                        <li>커뮤니티 지원: Stack Overflow, GitHub 등에서 문제 해결 자료 풍부</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 12px;">✓ 현실적 범위</h4>
+                    <ul>
+                        <li>120시간 개발 = 주 20시간 × 6주 (1인 개발자 충분)</li>
+                        <li>완벽한 자동화가 아닌 "반자동 보조 도구"로 목표 명확</li>
+                        <li>실패 시에도 각 단계별 결과물은 활용 가능 (API 연동, 시각화 등)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 향후 확장 -->
+            <div class="section">
+                <h2 class="section-title">향후 확장 가능성 (별도 계약)</h2>
+                <p style="color: #666; font-size: 13px; line-height: 1.7; margin-top: 10px;">
+                    현재 프로젝트가 성공적으로 완료되면 다음 단계로 확장 가능:<br><br>
+                    • <strong>AI 모델 추가:</strong> 항공사진 기반 도로 인식 (약 3개월, 3,000만원)<br>
+                    • <strong>전국 확대:</strong> 서울 외 지역 데이터 처리 (약 1개월, 500만원)<br>
+                    • <strong>클라우드 서비스:</strong> 웹 서버 구축, 다수 사용자 지원 (약 2개월, 1,500만원)<br>
+                    • <strong>추가 분석:</strong> 용도지역, 건폐율 자동 계산 등 (협의)
+                </p>
             </div>
         </div>
         
         <div class="footer">
-            <div class="footer-title">회사명</div>
-            <div class="footer-divider"></div>
-            <div class="footer-content">
-                대표이사: 권순일 | 사업자등록번호: 858-17-02458<br>
-                주소: 경기도 부천시 원미구 소향로13번길 14-22 802-23<br>
-                전화: 010-8384-4991 | 이메일: contact@dumokdatalab.com
+            <h3 style="color: #2d3748; margin-bottom: 8px; font-size: 16px;">문의 및 상담</h3>
+            <div class="contact-info">
+                <div>📧 your.email@example.com</div>
+                <div>📱 010-XXXX-XXXX</div>
+                <div>💼 온라인 미팅 가능 (Zoom, Google Meet)</div>
             </div>
-            <div class="footer-divider"></div>
-            <div class="footer-links">
-                <a href="privacy.html" target="_blank">개인정보처리방침</a>
-                <a href="terms.html" target="_blank">이용약관</a>
-            </div>
-            <div style="margin-top:15px; font-size:12px; opacity:0.8;">
-                © 2025 두목데이터랩. All rights reserved.
-            </div>
+            <p style="margin-top: 15px; color: #999; font-size: 12px;">
+                본 제안서는 실제 구현 가능한 범위만 포함하며,<br>
+                과장 없는 현실적 목표를 제시합니다<br>
+                작성일: 2025년 1월
+            </p>
         </div>
     </div>
-
-    <script>
-        // ═══════════════════════════════════════════
-        // ✏️ 여기만 수정하세요!
-        // ═══════════════════════════════════════════
-        
-        // Google Apps Script 웹 앱 URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
-        
-        // ═══════════════════════════════════════════
-        // ⚠️ 아래 코드는 수정하지 마세요!
-        // ═══════════════════════════════════════════
-
-        const form = document.getElementById('downloadForm');
-        const companyInput = document.getElementById('company');
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const privacyCheckbox = document.getElementById('privacy');
-        const termsCheckbox = document.getElementById('terms');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-
-        // 체크박스 상태에 따라 버튼 활성화/비활성화
-        function updateButtonState() {
-            if (privacyCheckbox.checked && termsCheckbox.checked) {
-                submitBtn.disabled = false;
-            } else {
-                submitBtn.disabled = true;
-            }
-        }
-
-        privacyCheckbox.addEventListener('change', updateButtonState);
-        termsCheckbox.addEventListener('change', updateButtonState);
-
-        function isValidEmail(email) { 
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
-        }
-
-        function showError(input, msg) {
-            input.classList.add('error');
-            const el = document.getElementById(input.id + 'Error');
-            el.textContent = msg;
-            el.classList.add('show');
-        }
-        
-        function clearError(input) {
-            input.classList.remove('error');
-            document.getElementById(input.id + 'Error').classList.remove('show');
-        }
-
-        async function saveToGoogleSheets() {
-            const data = {
-                company: companyInput.value.trim(),
-                name: nameInput.value.trim(),
-                email: emailInput.value.trim(),
-                timestamp: new Date().toLocaleString('ko-KR')
-            };
-            
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(data)
-                });
-                return true;
-            } catch (error) {
-                console.error('Error:', error);
-                return false;
-            }
-        }
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            // 입력 검증
-            let valid = true;
-            
-            if (!companyInput.value.trim()) { 
-                showError(companyInput, '회사명을 입력해주세요.'); 
-                valid = false; 
-            } else {
-                clearError(companyInput);
-            }
-            
-            // 담당자는 선택사항 (검증 안 함)
-            clearError(nameInput);
-            
-            if (!isValidEmail(emailInput.value)) { 
-                showError(emailInput, '올바른 이메일 주소를 입력해주세요.'); 
-                valid = false; 
-            } else {
-                clearError(emailInput);
-            }
-            
-            if (!valid) return;
-
-            // 버튼 비활성화
-            submitBtn.disabled = true;
-            submitBtn.textContent = '전송 중...';
-
-            // Google Sheets에 저장
-            const saved = await saveToGoogleSheets();
-
-            if (saved || GOOGLE_SCRIPT_URL.includes('YOUR_SCRIPT_ID')) {
-                // 성공 메시지
-                successMessage.classList.add('show');
-                form.reset();
-                
-                // 체크박스 초기화로 버튼 다시 비활성화
-                updateButtonState();
-                
-                // 3초 후 메시지 숨기기
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                    submitBtn.textContent = '신청하기';
-                }, 3000);
-            } else {
-                alert('전송 중 오류가 발생했습니다. 다시 시도해주세요.');
-                submitBtn.disabled = false;
-                submitBtn.textContent = '신청하기';
-            }
-        });
-
-        // 입력 시 에러 제거
-        companyInput.addEventListener('input', () => clearError(companyInput));
-        nameInput.addEventListener('input', () => clearError(nameInput));
-        emailInput.addEventListener('input', () => clearError(emailInput));
-    </script>
 </body>
 </html>
